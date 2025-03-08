@@ -253,6 +253,8 @@ By default, the server will run on http://localhost:5000
 
 #### Web UI
 
+![SpySpeak Web Interface](static/images/SpySpeak-Web-Screenshot.png)
+
 The web interface provides a simple form that allows you to:
 - Specify the number of codenames to generate
 - Choose from available themes
