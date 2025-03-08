@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpySpeak | Vistiqx</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Neue Montreal';
+            src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Neue Montreal';
+            src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Neue Montreal';
+            src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        :root {
+            --purple-light: #AC8FFE;
+            --purple-dark: #8A6FD6;
+            --dark-blue: #12264F;
+            --black: #121212;
+            --white: #E8E8F8;
+            --gray: #6E6E80;
+            --card-radius: 24px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Neue Montreal', 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 80px;
+            padding-bottom: 2rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header Styles */
+        header {
+            padding: 16px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(172, 143, 254, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--purple-light);
+        }
+
+        .nav-link.active {
+            color: var(--purple-light);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, var(--white), var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 400px;
+        }
+
+        .hero-image svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 10px var(--purple-light));
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            padding-top: 40px;
+            position: relative;
+        }
+        
+        .main-content::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(172, 143, 254, 0.2) 0%, rgba(172, 143, 254, 0) 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .main-content::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(172, 143, 254, 0.15) 0%, rgba(172, 143, 254, 0) 70%);
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-dark) 100%);
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(40px);
+            z-index: -1;
+        }
+        
+        .floating-element.one {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            right: 15%;
+            animation: float 15s ease-in-out infinite alternate;
+        }
+        
+        .floating-element.two {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: 10%;
+            animation: float 20s ease-in-out infinite alternate-reverse;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .header-section p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Form and Results Styles */
+        .form-container {
+            background: rgba(25, 25, 25, 0.8);
+            padding: 32px;
+            border-radius: var(--card-radius);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(172, 143, 254, 0.1);
+            transition: var(--transition);
+        }
+        
+        .form-container:hover {
+            border-color: rgba(172, 143, 254, 0.3);
+            box-shadow: 0 10px 30px rgba(172, 143, 254, 0.1);
+        }
+        
+        .form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .results-container {
+            background: rgba(25, 25, 25, 0.8);
+            padding: 32px;
+            border-radius: var(--card-radius);
+            border: 1px solid rgba(172, 143, 254, 0.1);
+            transition: var(--transition);
+        }
+        
+        .results-container:hover {
+            border-color: rgba(172, 143, 254, 0.3);
+            box-shadow: 0 10px 30px rgba(172, 143, 254, 0.1);
+        }
+        
+        .results-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--white);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(18, 18, 18, 0.8);
+            border: 1px solid rgba(172, 143, 254, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'Neue Montreal', 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--purple-light);
+            box-shadow: 0 0 0 2px rgba(172, 143, 254, 0.2);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(18, 18, 18, 0.8);
+            border: 1px solid rgba(172, 143, 254, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'Neue Montreal', 'Inter', sans-serif;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23AC8FFE' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px 12px;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--purple-light);
+            box-shadow: 0 0 0 2px rgba(172, 143, 254, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Neue Montreal', 'Inter', sans-serif;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(172, 143, 254, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(172, 143, 254, 0.5);
+            color: var(--white);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(172, 143, 254, 0.1);
+            border-color: var(--purple-light);
+        }
+        
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .w-100 {
+            width: 100%;
+        }
+        
+        /* Codename Cards */
+        .codename-card {
+            margin-bottom: 16px;
+            background: rgba(30, 30, 35, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 1.25rem;
+            border-left: 5px solid var(--purple-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .codename-card:hover {
+            transform: translateX(5px);
+            background: rgba(30, 30, 35, 0.9);
+            border-left-color: var(--purple-dark);
+        }
+        
+        .copy-btn {
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            color: var(--purple-light);
+        }
+        
+        /* API Info Section */
+        .api-info {
+            background: rgba(25, 25, 25, 0.8);
+            padding: 32px;
+            border-radius: var(--card-radius);
+            margin-top: 2rem;
+            border: 1px solid rgba(172, 143, 254, 0.1);
+            transition: var(--transition);
+        }
+        
+        .api-info:hover {
+            border-color: rgba(172, 143, 254, 0.3);
+            box-shadow: 0 10px 30px rgba(172, 143, 254, 0.1);
+        }
+        
+        .api-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .api-info h5 {
+            font-size: 1.1rem;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            color: var(--purple-light);
+        }
+        
+        .api-info p {
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+        
+        pre {
+            background: rgba(18, 18, 18, 0.8);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: var(--white);
+            border: 1px solid rgba(172, 143, 254, 0.1);
+        }
+        
+        /* Alert Styles */
+        .alert {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b6b;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .row {
+                flex-direction: column;
+            }
+            
+            .col-md-5, .col-md-7 {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .form-container, .results-container {
+                padding: 24px;
+            }
+        }
+        
+        /* Bootstrap-like Grid System */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        
+        .col-md-5 {
+            flex: 0 0 41.666667%;
+            max-width: 41.666667%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .col-md-7 {
+            flex: 0 0 58.333333%;
+            max-width: 58.333333%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .col {
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .d-flex {
+            display: flex;
+        }
+        
+        .justify-content-between {
+            justify-content: space-between;
+        }
+        
+        .justify-content-end {
+            justify-content: flex-end;
+        }
+        
+        .align-items-center {
+            align-items: center;
+        }
+        
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-muted {
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span>Vistiqx</span>
+                </a>
+                <!--<nav class="nav-links">
+                    <a href="#" class="nav-link active">Home</a>
+                </nav>-->
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">SpySpeak</h1>
+                <div class="hero-description">
+                    <p>Craft precise operational identifiers for your classified projects. This application combines carefully selected nouns and adjectives to create authentic-sounding codenames used by intelligence agencies throughout.</p>
+                    <br>
+                    <p>Generate names that sound like they came straight from intelligence briefings. From "Midnight Archer" to "Cobalt Sentinel," each codename maintains the perfect balance between memorability and professional gravity.</p>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Purple Spy Image -->
+                <img src="/static/images/Purple-Spy.png" alt="Purple Spy Silhouette" width="300" height="300" style="filter: drop-shadow(0 0 10px var(--purple-light));">
+            </div>
+        </div>
+
+        <!-- Error Alert -->
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-container">
+                    <h2>Generate Codenames</h2>
+                    <form action="/generate" method="post">
+                        <div class="mb-3">
+                            <label for="count" class="form-label">Number of codenames:</label>
+                            <input type="number" class="form-control" id="count" name="count" min="1" max="100" value="{{ count|default(5) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="theme" class="form-label">Theme:</label>
+                            <select class="form-select" id="theme" name="theme">
+                                <option value="default" {% if theme == 'default' or not theme %}selected{% endif %}>Default</option>
+                                {% for t in themes %}
+                                <option value="{{ t }}" {% if theme == t %}selected{% endif %}>{{ t|capitalize }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pattern" class="form-label">Pattern:</label>
+                            <select class="form-select" id="pattern" name="pattern">
+                                <option value="adj-noun" {% if pattern == 'adj-noun' or not pattern %}selected{% endif %}>Adjective + Noun</option>
+                                <option value="noun-noun" {% if pattern == 'noun-noun' %}selected{% endif %}>Noun + Noun</option>
+                                <option value="adj-adj-noun" {% if pattern == 'adj-adj-noun' %}selected{% endif %}>Adjective + Adjective + Noun</option>
+                                <option value="noun-adj" {% if pattern == 'noun-adj' %}selected{% endif %}>Noun + Adjective</option>
+                                <option value="adj-noun-number" {% if pattern == 'adj-noun-number' %}selected{% endif %}>Adjective + Noun + Number</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="case" class="form-label">Case Style:</label>
+                            <select class="form-select" id="case" name="case">
+                                <option value="title" {% if case == 'title' or not case %}selected{% endif %}>Title Case</option>
+                                <option value="upper" {% if case == 'upper' %}selected{% endif %}>UPPERCASE</option>
+                                <option value="lower" {% if case == 'lower' %}selected{% endif %}>lowercase</option>
+                                <option value="sentence" {% if case == 'sentence' %}selected{% endif %}>Sentence case</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="separator" class="form-label">Separator:</label>
+                            <select class="form-select" id="separator" name="separator">
+                                <option value=" " {% if separator == ' ' or not separator %}selected{% endif %}>Space ( )</option>
+                                <option value="-" {% if separator == '-' %}selected{% endif %}>Hyphen (-)</option>
+                                <option value="_" {% if separator == '_' %}selected{% endif %}>Underscore (_)</option>
+                                <option value="." {% if separator == '.' %}selected{% endif %}>Dot (.)</option>
+                                <option value="" {% if separator == '' %}selected{% endif %}>No separator</option>
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="min_length" class="form-label">Min Word Length:</label>
+                                <input type="number" class="form-control" id="min_length" name="min_length" min="0" max="20" value="{{ min_length|default(0) }}">
+                            </div>
+                            <div class="col">
+                                <label for="max_length" class="form-label">Max Word Length:</label>
+                                <input type="number" class="form-control" id="max_length" name="max_length" min="0" max="20" value="{{ max_length|default(0) }}">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Generate Codenames</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-7">
+                <div class="results-container">
+                    <h2>Generated Codenames</h2>
+                    {% if codenames %}
+                        <div class="d-flex justify-content-end mb-3">
+                            <button class="btn btn-sm btn-outline-primary" id="copyAll">Copy All</button>
+                        </div>
+                        <div id="codenames-list">
+                            {% for codename in codenames %}
+                                <div class="codename-card d-flex justify-content-between align-items-center">
+                                    <span>{{ codename }}</span>
+                                    <span class="copy-btn" data-codename="{{ codename }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">Codenames will appear here after generation.</p>
+                    {% endif %}
+                </div>
+
+                <div class="api-info mt-4">
+                    <h3>REST API</h3>
+                    <p>This codename generator is also available as a REST API:</p>
+                    <h5>Generate Codenames:</h5>
+                    <div class="d-flex align-items-center">
+                        <pre class="mb-0 flex-grow-1">GET /api/codenames?count=5&theme=default&pattern=adj-noun&case=title&separator=%20&min_length=0&max_length=0</pre>
+                        <span class="copy-btn ms-2" data-api="GET /api/codenames?count=5&theme=default&pattern=adj-noun&case=title&separator=%20&min_length=0&max_length=0">
+                            <i class="fas fa-copy"></i>
+                        </span>
+                    </div>
+                    <h5>List Available Themes:</h5>
+                    <div class="d-flex align-items-center">
+                        <pre class="mb-0 flex-grow-1">GET /api/themes</pre>
+                        <span class="copy-btn ms-2" data-api="GET /api/themes">
+                            <i class="fas fa-copy"></i>
+                        </span>
+                    </div>
+                    <p>The API returns JSON responses that can be integrated into your applications.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Copy functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Individual copy buttons for codenames
+            document.querySelectorAll('.copy-btn[data-codename]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const codename = this.getAttribute('data-codename');
+                    navigator.clipboard.writeText(codename).then(function() {
+                        // Temporarily change the icon to show success
+                        const originalHTML = btn.innerHTML;
+                        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+                        setTimeout(function() {
+                            btn.innerHTML = originalHTML;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // API endpoint copy buttons - Simplified and more reliable approach
+            document.querySelectorAll('.copy-btn[data-api]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    // Find the pre element that's a sibling of this button
+                    const parentDiv = this.parentNode;
+                    const preElement = parentDiv.querySelector('pre');
+                    
+                    if (preElement) {
+                        // Create a temporary textarea element to copy from
+                        const textarea = document.createElement('textarea');
+                        textarea.value = preElement.textContent;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        
+                        try {
+                            // Execute the copy command
+                            document.execCommand('copy');
+                            // Show success feedback
+                            const originalHTML = btn.innerHTML;
+                            btn.innerHTML = '<i class="fas fa-check"></i>';
+                            setTimeout(function() {
+                                btn.innerHTML = originalHTML;
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                            alert('Failed to copy. Please try selecting and copying the text manually.');
+                        } finally {
+                            // Clean up
+                            document.body.removeChild(textarea);
+                        }
+                    }
+                });
+            });
+
+            // Copy all button
+            const copyAllBtn = document.getElementById('copyAll');
+            if (copyAllBtn) {
+                copyAllBtn.addEventListener('click', function() {
+                    const codenames = Array.from(document.querySelectorAll('.codename-card span:first-child'))
+                        .map(span => span.textContent.trim())
+                        .join('\n');
+                    
+                    navigator.clipboard.writeText(codenames).then(function() {
+                        const originalText = copyAllBtn.textContent;
+                        copyAllBtn.textContent = 'Copied!';
+                        setTimeout(function() {
+                            copyAllBtn.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
